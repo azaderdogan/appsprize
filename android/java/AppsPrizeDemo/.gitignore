@@ -1,0 +1,26 @@
+local.properties
+
+# Built application files
+*build/
+*/captures/
+
+*/report.xml
+
+# IntelliJ
+*.iml
+.idea/
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx
+
+# Gradle generated files
+.gradle/
+
+# OS Files
+.DS_Store
+.DS_Store?
+*.DS_Store
+
+# Gemfile
+Gemfile.lock
