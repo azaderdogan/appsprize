@@ -6,6 +6,7 @@ import com.appsamurai.appsprize.AppReward
 import com.appsamurai.appsprize.AppsPrize
 import com.appsamurai.appsprize.AppsPrizeListener
 import com.appsamurai.appsprize.config.AppsPrizeConfig
+import java.util.Locale
 
 const val APPS_PRIZE_APP_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.6YZeCXIC7StDO4wf1m0wQusrVR8ZwxzXIKFVUDYLKP4"
 const val USER_ID = "TEST_USER_ID"
@@ -18,6 +19,8 @@ class MainApplication : Application() {
 
         val config = AppsPrizeConfig.Builder()
             .setUserId(USER_ID)
+//            .setTestMode(true)
+//            .setCountry(Locale.GERMANY)
             .build(
                 APPS_PRIZE_APP_TOKEN,
                 ADVERTISING_ID
