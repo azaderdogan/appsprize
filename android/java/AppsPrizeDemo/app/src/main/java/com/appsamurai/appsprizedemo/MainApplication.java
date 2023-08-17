@@ -11,6 +11,7 @@ import com.appsamurai.appsprize.AppsPrizeListener;
 import com.appsamurai.appsprize.config.AppsPrizeConfig;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MainApplication extends Application {
 
@@ -24,6 +25,8 @@ public class MainApplication extends Application {
 
         AppsPrizeConfig config = new AppsPrizeConfig.Builder()
                 .setUserId(USER_ID)
+//                .setTestMode(true)
+//                .setCountry(Locale.GERMANY)
                 .build(APPS_PRIZE_APP_TOKEN, ADVERTISING_ID);
 
         AppsPrize.initialize(getApplicationContext(), config, new AppsPrizeListener() {
