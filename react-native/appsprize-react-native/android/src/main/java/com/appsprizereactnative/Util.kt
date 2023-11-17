@@ -21,6 +21,7 @@ internal fun mapToJsonString(map: Map<String, Any?>?): String? {
         null
     }
 }
+
 private fun JSONObject.toMap(): Map<String, Any?> = keys().asSequence().associateWith {
   when (val value = this[it])
   {
