@@ -1,9 +1,10 @@
 import { AppsPrizeEventType, type AppsPrizeListener, type OnInitializeEvent, type OnInitializeFailedEvent, type OnRewardUpdateEvent } from "./Events"
-import AppsPrizeNative, { addEventListener, decodeData, encodeData } from "./AppsPrizeNative"
-import type { AppsPrizeConfig } from "./Data";
+import AppsPrizeNative, { addEventListener, decodeData, encodeData, removeAllListeners } from "./AppsPrizeNative"
+import type { AppRewards, AppsPrizeConfig } from "./Data";
 
 
-const init = (config: AppsPrizeConfig, listener: AppsPrizeListener) => {
+function init(config: AppsPrizeConfig, listener: AppsPrizeListener) {
+    removeAllListeners();
     let rawConfig = encodeData({ config });
     if (!rawConfig) return;
 
@@ -22,11 +23,30 @@ const init = (config: AppsPrizeConfig, listener: AppsPrizeListener) => {
     AppsPrizeNative?.init(rawConfig)
 }
 
-const launch = () => {
-    AppsPrizeNative?.launch();
+function launch(): Promise<boolean> {
+    return AppsPrizeNative?.launch() ?? Promise.reject("AppsPrizeNative not available")
 }
+
+function doReward(callback: (rewards: AppRewards[])=>void) {
+    AppsPrizeNative?.doReward( raw => {
+        let data = decodeData(raw)["rewards"] as AppRewards[]
+        callback(data)
+    })
+}
+
+function hasPermissions(): Promise<boolean> {
+    return AppsPrizeNative?.hasPermissions() ?? Promise.reject("AppsPrizeNative not available")
+}
+
+function requestPermission(): Promise<boolean> {
+    return AppsPrizeNative?.requestPermission() ?? Promise.reject("AppsPrizeNative not available")
+}
+
 
 export default {
     init,
-    launch
+    launch,
+    doReward,
+    hasPermissions,
+    requestPermission,
 };

@@ -5,8 +5,11 @@ import android.util.Log
 import com.appsamurai.appsprize.AppReward
 import com.appsamurai.appsprize.AppsPrize
 import com.appsamurai.appsprize.AppsPrizeListener
+import com.appsamurai.appsprize.RewardLevel
 import com.appsamurai.appsprize.config.AppsPrizeConfig
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Callback
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -57,11 +60,66 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
     }
 
     @ReactMethod
-    fun launch() {
+    fun launch(promise: Promise) {
+        Log.d("[AppsPrizeAndroid]", " launch()")
+        val activity = currentActivity ?: run {
+            promise.reject(Exception("AppsPrize:Android: no current activity found"))
+            return
+        }
+        Handler(activity.mainLooper).post {
+            val result = AppsPrize.launchActivity(activity)
+            promise.resolve(result)
+        }
+    }
+
+    @ReactMethod
+    fun doReward(callback: Callback) {
+        Log.d("[AppsPrizeAndroid]", " doReward()")
         val activity = currentActivity ?: return
         Handler(activity.mainLooper).post {
-            AppsPrize.launchActivity(activity)
+            AppsPrize.doReward(activity) { rewards ->
+                val appRewardsMap = rewards.mapNotNull { createAppReward(it) }
+                callback.invoke(mapToJsonString(mapOf(
+                    "rewards" to appRewardsMap
+                )))
+            }
         }
+    }
+
+    @ReactMethod
+    fun hasPermissions(promise: Promise) {
+        Log.d("[AppsPrizeAndroid]", " hasPermissions()")
+        val activity = currentActivity ?: run {
+            promise.reject(Exception("AppsPrize:Android: no current activity found"))
+            return
+        }
+        Handler(activity.mainLooper).post {
+            val result = AppsPrize.hasPermissions(activity)
+            promise.resolve(result)
+        }
+    }
+
+    @ReactMethod
+    fun requestPermission(promise: Promise) {
+        Log.d("[AppsPrizeAndroid]", " requestPermission()")
+        val activity = currentActivity ?: run {
+            promise.reject(Exception("AppsPrize:Android: no current activity found"))
+            return
+        }
+        Handler(activity.mainLooper).post {
+            val result = AppsPrize.requestPermission(activity)
+            promise.resolve(result)
+        }
+    }
+
+    @ReactMethod
+    fun addListener(eventName: String?) {
+        Log.d("[AppsPrizeAndroid]", " addListener:eventName:${eventName}")
+    }
+
+    @ReactMethod
+    fun removeListeners(count: Int?) {
+        Log.d("[AppsPrizeAndroid]", " removeListeners:count:${count}")
     }
 
     private fun createAppReward(reward: AppReward): Map<String, Any?> {

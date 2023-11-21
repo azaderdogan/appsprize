@@ -9,7 +9,10 @@ const LINKING_ERROR =
 
 interface AppsprizeReactNativeInterface {
     init(raw: string): void;
-    launch(): void;
+    launch(): Promise<boolean>;
+    doReward(callback: (raw: string)=>void): void;
+    hasPermissions(): Promise<boolean>;
+    requestPermission(): Promise<boolean>
 }
 
 const AppsPrizeNative = Platform.OS === "android" ? (
@@ -65,7 +68,6 @@ export const removeAllListeners = () => {
 }
 
 export const decodeData = (raw: string) => {
-    console.log(raw)
     try {
         return JSON.parse(raw)
     } catch {
