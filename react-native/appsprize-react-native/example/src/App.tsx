@@ -1,33 +1,62 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Button } from 'react-native';
-import AppsPrize from 'appsprize-react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import AppsPrize, { type AppsPrizeConfig, type AppsPrizeStyleConfig } from 'appsprize-react-native';
 
-let config = {
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTV9.XmX_0neDCxs7FKSSOnTk1KRSN8FSm9lBhJhlOAX0HHs",
-  userId: "melih",
-  advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111"
+
+const buildConfig = (customization: Boolean): AppsPrizeConfig => {
+  return {
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTV9.XmX_0neDCxs7FKSSOnTk1KRSN8FSm9lBhJhlOAX0HHs",
+    userId: "melih",
+    advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
+    country: "US",
+    language: "en",
+    style: customization ? styleConfig : undefined
+  };
 }
-AppsPrize.init(config, {
-  onInitialize: (event) => {
-    console.log("AppsPrize:TS:onInitialize")
+
+let styleConfig: AppsPrizeStyleConfig =  {
+  primaryColor: "#265073",
+  secondaryColor: "#F1FADA",
+  bannerDrawable: "custom_banner",
+  offersTitleText: "Offer Apps",
+  appsTitleText: "Active Apps",
+  typeface: "kodemono.ttf",
+  navigation: {
+    selectColor: "#F1FADA",
+    deselectColor: "#9AD0C2",
+    backgroundColor: "#2D9596",
   },
-  onInitializeFailed: (event) => {
-    console.log(`AppsPrize:TS:onInitializeFailed:${JSON.stringify(event)}`)
-  },
-  onRewardUpdate: (event) => {
-    console.log(`AppsPrize:TS:onRewardUpdate:${JSON.stringify(event)}`)
+  item: {
+    backgroundGradientColors: [
+      ["#2D9596", "#9AD0C2"]
+    ],
+    currencyIconDrawable: undefined,
   }
-})
+}
 
 export default function App() {
+
+  React.useEffect(() => {
+    AppsPrize.init(buildConfig(false), {
+      onInitialize: () => {
+        console.log("AppsPrize:TS:onInitialize")
+      },
+      onInitializeFailed: (event) => {
+        console.log(`AppsPrize:TS:onInitializeFailed:${JSON.stringify(event)}`)
+      },
+      onRewardUpdate: (event) => {
+        console.log(`AppsPrize:TS:onRewardUpdate:${JSON.stringify(event)}`)
+      }
+    })
+  }, [])
 
   return (
     <View style={styles.container}>
       <Button
         title='AppsPrize init'
         onPress={() => {
-          AppsPrize.init(config, {
+          AppsPrize.init(buildConfig(true), {
             onInitialize: (event) => {
               console.log("AppsPrize:TS:onInitialize")
             },
@@ -79,6 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    width: "auto",
   },
   box: {
     width: 60,

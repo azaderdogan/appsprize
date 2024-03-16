@@ -5,18 +5,18 @@ export enum AppsPrizeEventType {
     onInitialize = "onInitialize",
     onInitializeFailed = "onInitializeFailed",
     onRewardUpdate = "onRewardUpdate"
-};
+}
 
 
-export interface OnInitializeEvent {};
+export interface OnInitializeEvent {}
 
 export interface OnInitializeFailedEvent {
-    errorMessage?: string
-};
+    errorMessage?: string;
+}
 
 export interface OnRewardUpdateEvent {
-    rewards?: AppRewards[]
-};
+    rewards?: AppRewards[];
+}
 
 export interface AppsPrizeListener{
     onInitialize?: (event: OnInitializeEvent)=>void;
