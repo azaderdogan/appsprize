@@ -1,5 +1,10 @@
 package com.appsprizereactnative
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Typeface
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -33,4 +38,24 @@ private fun JSONObject.toMap(): Map<String, Any?> = keys().asSequence().associat
     JSONObject.NULL -> null
     else            -> value
   }
+}
+
+internal fun getTypeface(context: Context, fontName: String?): Typeface? {
+    fontName ?: return null
+    return try {
+        Typeface.createFromAsset(context.assets, fontName)
+    } catch (_: Exception) {
+        null
+    }
+}
+
+@SuppressLint("DiscouragedApi")
+internal fun getDrawable(context: Context, name: String?): Drawable? {
+    name ?: return null
+    return try {
+        val id = context.resources.getIdentifier(name, "drawable", context.packageName)
+        ContextCompat.getDrawable(context, id)
+    } catch (_: Exception) {
+        null
+     }
 }

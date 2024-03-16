@@ -1,12 +1,15 @@
 package com.appsprizereactnative
 
+import android.graphics.Color
 import android.os.Handler
 import android.util.Log
 import com.appsamurai.appsprize.AppReward
 import com.appsamurai.appsprize.AppsPrize
 import com.appsamurai.appsprize.AppsPrizeListener
-import com.appsamurai.appsprize.RewardLevel
 import com.appsamurai.appsprize.config.AppsPrizeConfig
+import com.appsamurai.appsprize.config.style.AppsPrizeItemStyling
+import com.appsamurai.appsprize.config.style.AppsPrizeNavigationStyling
+import com.appsamurai.appsprize.config.style.AppsPrizeStyleConfig
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Callback
 import com.facebook.react.bridge.Promise
@@ -14,7 +17,6 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.modules.core.DeviceEventManagerModule
-import java.util.Locale
 
 class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext) {
 
@@ -27,13 +29,8 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
         Handler(reactApplicationContext.mainLooper).post {
             val map = jsonStringToMap(raw)?.get("config") as? Map<String, Any?> ?: return@post
             Log.d("[AppsPrizeAndroid]", "init with config $map")
-            val token = map["token"] as? String ?: return@post
-            val advertisingId =  map["advertisingId"] as? String ?: return@post
-            val userId =  map["userId"] as? String
-            val country = map["country"] as? String
-            val testMode = map["testMode"] as? Boolean
 
-            val appsPrizeConfig = buildConfig(token, advertisingId, userId, country, testMode)
+            val appsPrizeConfig = buildConfig(map) ?: return@post
             AppsPrize.initialize(reactApplicationContext, appsPrizeConfig, object: AppsPrizeListener {
                 override fun onInitialize() {
                     Log.d("[AppsPrizeAndroid]", "onInitialize")
@@ -135,15 +132,71 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
         )
     }
 
-    private fun buildConfig(token: String, advertisingId: String, userId: String?, country: String?, testMode: Boolean?): AppsPrizeConfig {
-        var builder = AppsPrizeConfig.Builder()
-        userId?.let { builder = builder.setUserId(it) }
-        country?.let {  builder = builder.setCountry(Locale.forLanguageTag(it)) }
-        testMode?.let { builder = builder.setTestMode(it) }
-        return builder.build(
-            token,
-            advertisingId
-        )
+    private fun buildConfig(map: Map<String, Any?>): AppsPrizeConfig? {
+        val token = map["token"] as? String ?: return null
+            val advertisingId =  map["advertisingId"] as? String ?: return null
+            val userId =  map["userId"] as? String ?: return null
+            val country = map["country"] as? String
+            val language = map["language"] as? String
+
+        return AppsPrizeConfig.Builder()
+            .setCountry(country)
+            .setLanguage(language)
+            .setStyle(buildStyleConfig(map["style"] as? Map<String, Any?>))
+            .build(
+                token,
+                advertisingId,
+                userId
+            )
+    }
+
+    private fun buildStyleConfig(map: Map<String, Any?>?): AppsPrizeStyleConfig? {
+        map ?: return null
+        val primaryColor = (map["primaryColor"] as? String)?.let { Color.parseColor(it) }
+        val secondaryColor = (map["secondaryColor"] as? String)?.let { Color.parseColor(it) }
+        val typeface = getTypeface(reactApplicationContext, map["typeface"] as? String)
+        val bannerDrawable = getDrawable(reactApplicationContext, map["bannerDrawable"] as? String)
+        val offersTitleText = map["offersTitleText"] as? String
+        val appsTitleText = map["appsTitleText"] as? String
+
+        return AppsPrizeStyleConfig.Builder()
+            .setPrimaryColor(primaryColor)
+            .setSecondaryColor(secondaryColor)
+            .setTypeface(typeface)
+            .setBannerDrawable(bannerDrawable)
+            .setOffersTitleText(offersTitleText)
+            .setAppsTitleText(appsTitleText)
+            .setItemStyling(buildItemStyling(map["item"] as? Map<String, Any?>))
+            .setNavigationStyling(buildNavigationStyling(map["navigation"] as? Map<String, Any?>))
+            .build()
+    }
+
+     private fun buildItemStyling(map: Map<String, Any?>?): AppsPrizeItemStyling? {
+        map ?: return null
+        val backgroundGradientColors = (map["backgroundGradientColors"] as? List<List<String>>)?.map {
+            it.map { color ->
+                Color.parseColor(color)
+            }
+        }
+        val currencyIconDrawable = getDrawable(reactApplicationContext, map["currencyIconDrawable"] as? String)
+
+        return AppsPrizeItemStyling.Builder()
+            .setBackgroundGradientColors(backgroundGradientColors)
+            .setCurrencyIconImage(currencyIconDrawable)
+            .build()
+    }
+
+     private fun buildNavigationStyling(map: Map<String, Any?>?): AppsPrizeNavigationStyling? {
+        map ?: return null
+        val backgroundColor = (map["backgroundColor"] as? String)?.let { Color.parseColor(it) }
+        val selectColor = (map["selectColor"] as? String)?.let { Color.parseColor(it) }
+        val deselectColor = (map["deselectColor"] as? String)?.let { Color.parseColor(it) }
+
+        return AppsPrizeNavigationStyling.Builder()
+            .setBackgroundColor(backgroundColor)
+            .setSelectColor(selectColor)
+            .setDeselectColor(deselectColor)
+            .build()
     }
 
     private fun sendEvent(event: Events, map: Map<String, Any?>? = null) {
@@ -165,3 +218,4 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
         const val NAME = "AppsprizeReactNative"
     }
 }
+
