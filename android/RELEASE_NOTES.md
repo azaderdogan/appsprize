@@ -1,5 +1,15 @@
 # Release Notes
 
+### 0.4.1 (16.03.2024)
+* fix ComposeView not found in Java project
+
+### 0.4.0 (15.03.2024)
+* add ui customization
+* add client-side VPN check
+* add user scoring
+* add user analytic tracking events
+* fix navigation to Usage Access Settings
+
 ### 0.3.0 (6.09.2023)
 * add user consent form
 * fix offers and your apps page titles
