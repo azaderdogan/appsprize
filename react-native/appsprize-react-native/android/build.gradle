@@ -80,7 +80,6 @@ android {
 repositories {
   mavenCentral()
   google()
-    mavenLocal()
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -91,6 +90,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.appsamurai.appsprize:appsprize:0.4.1"
+  implementation "com.appsamurai.appsprize:appsprize:0.4.2"
 }
 
