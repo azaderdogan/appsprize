@@ -11,21 +11,7 @@ npm install appsprize-react-native
 ## Usage
 
 ```js
-import { multiply } from 'appsprize-react-native';
-
-// ...
-
-const result = await multiply(3, 7);
+import AppsPrize from 'appsprize-react-native';
 ```
 
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+Appsprize ReactNative [Docs](https://docs.appsprize.com/docs/setting-up-the-sdk-1)
