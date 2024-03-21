@@ -1,5 +1,8 @@
 # Release Notes
 
+### 0.4.2 (21.03.2024)
+* fix user permission view flicker
+
 ### 0.4.1 (19.03.2024)
 * downgrade android targetSDK to 33
 
