@@ -1,5 +1,8 @@
 # Release Notes
 
+### 0.4.4 (22.03.2024)
+* fix proguard duplicate class issue
+
 ### 0.4.3 (21.03.2024)
 * fix user permission view flicker
 
