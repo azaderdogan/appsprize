@@ -1,5 +1,11 @@
 # Release Notes
 
+### 1.0.0 (2.05.2024)
+* improved UI
+* added task-based offer support
+* improved process thread handling
+* added active foreground service
+
 ### 0.4.3 (22.03.2024)
 * fix proguard duplicate class issue
 

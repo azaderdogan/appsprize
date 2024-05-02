@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import AppsPrize, { type AppsPrizeConfig, type AppsPrizeStyleConfig } from 'appsprize-react-native';
 
 
@@ -22,17 +22,7 @@ let styleConfig: AppsPrizeStyleConfig =  {
   offersTitleText: "Offer Apps",
   appsTitleText: "Active Apps",
   typeface: "kodemono.ttf",
-  navigation: {
-    selectColor: "#F1FADA",
-    deselectColor: "#9AD0C2",
-    backgroundColor: "#2D9596",
-  },
-  item: {
-    backgroundGradientColors: [
-      ["#2D9596", "#9AD0C2"]
-    ],
-    currencyIconDrawable: undefined,
-  }
+  // currencyIcon: undefined,
 }
 
 export default function App() {

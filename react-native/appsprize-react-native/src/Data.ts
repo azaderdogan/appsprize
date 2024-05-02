@@ -3,39 +3,28 @@
 export interface AppsPrizeConfig {
     token: string;
     advertisingId: string;
-    userId?: string;
+    userId: string;
     country?: string;
     language?: string;
+    foregroundServiceActive?: boolean;
     style?: AppsPrizeStyleConfig;
 }
 
 export interface AppsPrizeStyleConfig {
     primaryColor?: string;
     secondaryColor?: string;
+    highlightColor?: string;
     typeface?: string;
     bannerDrawable?: string;
     offersTitleText?: string;
     appsTitleText?: string;
-    item?: AppsPrizeItemStyling;
-    navigation?: AppsPrizeNavigationStyling;
-}
-
-export interface AppsPrizeItemStyling {
-    backgroundGradientColors?: string[][];
-    currencyIconDrawable?: string;
-}
-
-export interface AppsPrizeNavigationStyling {
-    backgroundColor?: string;
-    selectColor?: string;
-    deselectColor?: string;
+    currencyIcon?: string;
 }
 
 export interface RewardLevel {
-    currency: string;
-    level: number;
+    level?: number;
     points: number;
-    time: number;
+    currency: string;
 }
 
 export interface AppRewards {

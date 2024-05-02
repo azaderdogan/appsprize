@@ -7,8 +7,6 @@ import com.appsamurai.appsprize.AppReward
 import com.appsamurai.appsprize.AppsPrize
 import com.appsamurai.appsprize.AppsPrizeListener
 import com.appsamurai.appsprize.config.AppsPrizeConfig
-import com.appsamurai.appsprize.config.style.AppsPrizeItemStyling
-import com.appsamurai.appsprize.config.style.AppsPrizeNavigationStyling
 import com.appsamurai.appsprize.config.style.AppsPrizeStyleConfig
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Callback
@@ -126,7 +124,6 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
                     "currency" to it.currency,
                     "level" to it.level,
                     "points" to it.points,
-                    "time" to it.time,
                 )
             }
         )
@@ -134,14 +131,16 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
 
     private fun buildConfig(map: Map<String, Any?>): AppsPrizeConfig? {
         val token = map["token"] as? String ?: return null
-            val advertisingId =  map["advertisingId"] as? String ?: return null
-            val userId =  map["userId"] as? String ?: return null
-            val country = map["country"] as? String
-            val language = map["language"] as? String
+        val advertisingId =  map["advertisingId"] as? String ?: return null
+        val userId =  map["userId"] as? String ?: return null
+        val country = map["country"] as? String
+        val language = map["language"] as? String
+        val foregroundServiceActive = map["foregroundServiceActive"] as? Boolean
 
         return AppsPrizeConfig.Builder()
             .setCountry(country)
             .setLanguage(language)
+            .setForegroundServiceEnabled(foregroundServiceActive)
             .setStyle(buildStyleConfig(map["style"] as? Map<String, Any?>))
             .build(
                 token,
@@ -154,48 +153,22 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
         map ?: return null
         val primaryColor = (map["primaryColor"] as? String)?.let { Color.parseColor(it) }
         val secondaryColor = (map["secondaryColor"] as? String)?.let { Color.parseColor(it) }
+        val highlightColor = (map["highlightColor"] as? String)?.let { Color.parseColor(it) }
         val typeface = getTypeface(reactApplicationContext, map["typeface"] as? String)
         val bannerDrawable = getDrawable(reactApplicationContext, map["bannerDrawable"] as? String)
         val offersTitleText = map["offersTitleText"] as? String
         val appsTitleText = map["appsTitleText"] as? String
+        val currencyIcon = getDrawable(reactApplicationContext, map["currencyIcon"] as? String)
 
         return AppsPrizeStyleConfig.Builder()
             .setPrimaryColor(primaryColor)
             .setSecondaryColor(secondaryColor)
+            .setHighlightColor(highlightColor)
             .setTypeface(typeface)
             .setBannerDrawable(bannerDrawable)
             .setOffersTitleText(offersTitleText)
             .setAppsTitleText(appsTitleText)
-            .setItemStyling(buildItemStyling(map["item"] as? Map<String, Any?>))
-            .setNavigationStyling(buildNavigationStyling(map["navigation"] as? Map<String, Any?>))
-            .build()
-    }
-
-     private fun buildItemStyling(map: Map<String, Any?>?): AppsPrizeItemStyling? {
-        map ?: return null
-        val backgroundGradientColors = (map["backgroundGradientColors"] as? List<List<String>>)?.map {
-            it.map { color ->
-                Color.parseColor(color)
-            }
-        }
-        val currencyIconDrawable = getDrawable(reactApplicationContext, map["currencyIconDrawable"] as? String)
-
-        return AppsPrizeItemStyling.Builder()
-            .setBackgroundGradientColors(backgroundGradientColors)
-            .setCurrencyIconImage(currencyIconDrawable)
-            .build()
-    }
-
-     private fun buildNavigationStyling(map: Map<String, Any?>?): AppsPrizeNavigationStyling? {
-        map ?: return null
-        val backgroundColor = (map["backgroundColor"] as? String)?.let { Color.parseColor(it) }
-        val selectColor = (map["selectColor"] as? String)?.let { Color.parseColor(it) }
-        val deselectColor = (map["deselectColor"] as? String)?.let { Color.parseColor(it) }
-
-        return AppsPrizeNavigationStyling.Builder()
-            .setBackgroundColor(backgroundColor)
-            .setSelectColor(selectColor)
-            .setDeselectColor(deselectColor)
+            .setCurrencyIcon(currencyIcon)
             .build()
     }
 
