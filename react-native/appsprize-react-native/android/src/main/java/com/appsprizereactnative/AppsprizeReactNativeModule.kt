@@ -135,12 +135,10 @@ class AppsprizeReactNativeModule(reactContext: ReactApplicationContext): ReactCo
         val userId =  map["userId"] as? String ?: return null
         val country = map["country"] as? String
         val language = map["language"] as? String
-        val foregroundServiceActive = map["foregroundServiceActive"] as? Boolean
 
         return AppsPrizeConfig.Builder()
             .setCountry(country)
             .setLanguage(language)
-            .setForegroundServiceEnabled(foregroundServiceActive)
             .setStyle(buildStyleConfig(map["style"] as? Map<String, Any?>))
             .build(
                 token,
