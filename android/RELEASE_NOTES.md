@@ -1,5 +1,15 @@
 # Release Notes
 
+### 1.1.0 (23.05.2024)
+* added special tasks for time based campaigns
+* added end time for special tasks
+* added campaign creatives
+* added localization for FR, DE, ES
+* added support button to FAQ screen
+* removed forground service
+* updated AppsPrizeActivity as only portrait
+* fixed tracker not initialized issue
+
 ### 1.0.0 (2.05.2024)
 * improved UI
 * added task-based offer support
