@@ -6,7 +6,6 @@ export interface AppsPrizeConfig {
     userId: string;
     country?: string;
     language?: string;
-    foregroundServiceActive?: boolean;
     style?: AppsPrizeStyleConfig;
 }
 
@@ -22,7 +21,7 @@ export interface AppsPrizeStyleConfig {
 }
 
 export interface RewardLevel {
-    level?: number;
+    level: number;
     points: number;
     currency: string;
 }
