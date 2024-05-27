@@ -1,6 +1,6 @@
 {
   "name": "appsprize-react-native",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Appsprize Playtime SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

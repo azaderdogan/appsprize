@@ -1,5 +1,8 @@
 # Release Notes
 
+### 1.1.1 (27.05.2024)
+* fixed campaign type filters clipping
+
 ### 1.1.0 (23.05.2024)
 * added special tasks for time based campaigns
 * added end time for special tasks

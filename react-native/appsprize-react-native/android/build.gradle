@@ -90,6 +90,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.appsamurai.appsprize:appsprize:1.1.0"
+  implementation "com.appsamurai.appsprize:appsprize:1.1.1"
 }
 
