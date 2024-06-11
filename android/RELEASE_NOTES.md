@@ -1,5 +1,8 @@
 # Release Notes
 
+### 1.1.2 (11.06.2024)
+* added on app restore dismiss AppsPrize activity
+
 ### 1.1.1 (27.05.2024)
 * fixed campaign type filters clipping
 
