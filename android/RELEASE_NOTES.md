@@ -1,5 +1,11 @@
 # Release Notes
 
+### 1.1.3 (16.07.2024)
+* fixed special offer time-out UI
+* updated localization
+* updated offer detail screen order
+* improved time-based rewards on network fail
+
 ### 1.1.2 (11.06.2024)
 * added on app restore dismiss AppsPrize activity
 
