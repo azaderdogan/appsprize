@@ -14,6 +14,6 @@ public class NavigateAppsPrizeButton : MonoBehaviour
 
 	void TaskOnClick(){
 
-		AppsPrize.LaunchActivity();
+		AppsPrize.Launch();
 	}
 }

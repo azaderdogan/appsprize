@@ -5,45 +5,53 @@ namespace AppsPrizeUnity.Platforms.Android
 {
     internal static class AppsPrizeConfigAndroid
     {
-        public static AndroidJavaObject CreateConfig(string token, string advertisingId, string userId, string country = null, string language = null, AndroidJavaObject styleConfig = null)
+        public static AndroidJavaObject Create(AppsPrizeConfig config)
         {
-            AndroidJavaObject configBuilder = new AndroidJavaObject("com.appsamurai.appsprize.config.AppsPrizeConfig$Builder");
+            AndroidJavaObject configBuilder = new("com.appsamurai.appsprize.config.AppsPrizeConfig$Builder");
 
-            if (!string.IsNullOrEmpty(country))
+            if (!string.IsNullOrEmpty(config.country))
             {
-                configBuilder.Call<AndroidJavaObject>("setCountry", country);
+                configBuilder.Call<AndroidJavaObject>("setCountry", config.country);
             }
 
-            if (!string.IsNullOrEmpty(language))
+            if (!string.IsNullOrEmpty(config.language))
             {
-                configBuilder.Call<AndroidJavaObject>("setLanguage", language);
+                configBuilder.Call<AndroidJavaObject>("setLanguage", config.language);
             }
 
-            if (styleConfig != null)
+            if (config.styleConfig != null)
             {
-                configBuilder.Call<AndroidJavaObject>("setStyle", styleConfig);
+                configBuilder.Call<AndroidJavaObject>("setStyle", CreateStyleConfig(config.styleConfig));
             }
 
-            AndroidJavaObject appsPrizeConfig = configBuilder.Call<AndroidJavaObject>("build", token, advertisingId, userId);
+            AndroidJavaObject appsPrizeConfig = configBuilder.Call<AndroidJavaObject>("build", config.token, config.advertisingId, config.userId);
             return appsPrizeConfig;
         }
 
-        public static AndroidJavaObject CreateStyleConfig(int primaryColor, int secondaryColor, int highlightColor, string offersTitleText = null, string appsTitleText = null)
+        static AndroidJavaObject CreateStyleConfig(AppsPrizeStyleConfig styleConfig)
         {
-            AndroidJavaObject styleConfigBuilder = new AndroidJavaObject("com.appsamurai.appsprize.config.style.AppsPrizeStyleConfig$Builder");
+            AndroidJavaObject styleConfigBuilder = new("com.appsamurai.appsprize.config.style.AppsPrizeStyleConfig$Builder");
 
-            styleConfigBuilder.Call<AndroidJavaObject>("setPrimaryColor", primaryColor);
-            styleConfigBuilder.Call<AndroidJavaObject>("setSecondaryColor", secondaryColor);
-            styleConfigBuilder.Call<AndroidJavaObject>("setHighlightColor", highlightColor);
-
-            if (!string.IsNullOrEmpty(offersTitleText))
-            {
-                styleConfigBuilder.Call<AndroidJavaObject>("setOffersTitleText", offersTitleText);
+            if (styleConfig.primaryColor.HasValue) {
+                styleConfigBuilder.Call<AndroidJavaObject>("setPrimaryColor", AndroidUtil.ToAndroidColor(styleConfig.primaryColor.Value));
             }
 
-            if (!string.IsNullOrEmpty(appsTitleText))
+            if (styleConfig.secondaryColor.HasValue) {
+                styleConfigBuilder.Call<AndroidJavaObject>("setSecondaryColor", AndroidUtil.ToAndroidColor(styleConfig.secondaryColor.Value));
+            }
+
+            if (styleConfig.highlightColor.HasValue) {
+                styleConfigBuilder.Call<AndroidJavaObject>("setHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.highlightColor.Value));
+            }
+
+            if (!string.IsNullOrEmpty(styleConfig.offersTitleText))
             {
-                styleConfigBuilder.Call<AndroidJavaObject>("setAppsTitleText", appsTitleText);
+                styleConfigBuilder.Call<AndroidJavaObject>("setOffersTitleText", styleConfig.offersTitleText);
+            }
+
+            if (!string.IsNullOrEmpty(styleConfig.appsTitleText))
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setAppsTitleText", styleConfig.appsTitleText);
             }
 
             AndroidJavaObject appsPrizeStyleConfig = styleConfigBuilder.Call<AndroidJavaObject>("build");

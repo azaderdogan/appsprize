@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AppsPrizeUnity.Platforms.Android;
 
 namespace AppsPrizeUnity
@@ -5,10 +6,10 @@ namespace AppsPrizeUnity
     public static class AppsPrize
     {
 
-        public static void Initialize()
+        public static void Initialize(AppsPrizeConfig config, IAppsPrizeListener listener)
         {
             #if UNITY_ANDROID
-                AppsPrizeAndroid.Initialize();
+                AppsPrizeAndroid.Initialize(config, listener);
             #endif
         }
 
@@ -18,10 +19,10 @@ namespace AppsPrizeUnity
         //     appsPrizeClass.CallStatic("doReward", unityActivity, rewardListener);
         // }
 
-        public static void LaunchActivity()
+        public static void Launch()
         {
             #if UNITY_ANDROID
-                AppsPrizeAndroid.LaunchActivity();
+                AppsPrizeAndroid.Launch();
             #endif
         }
 
@@ -36,6 +37,20 @@ namespace AppsPrizeUnity
         // {
         //     return appsPrizeClass.CallStatic<bool>("requestPermission", unityActivity);
         // }
+    }
+
+    public interface IAppsPrizeListener
+    {
+        void OnInitialize();
+        void OnInitializeFailed(string errorMessage);
+        void OnRewardUpdate(List<Reward> rewards);
+    }
+
+    public class Reward
+    {
+        public int Level { get; set; }
+        public int Points { get; set; }
+        public string Currency { get; set; }
     }
 }
 

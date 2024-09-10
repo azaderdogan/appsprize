@@ -19,13 +19,13 @@ namespace AppsPrizeUnity.Platforms.Android
         }
 
         // Initialize AppsPrize with AppsPrizeConfig and listener
-        public static void Initialize()
+        public static void Initialize(AppsPrizeConfig config, IAppsPrizeListener listener)
         {
             Debug.Log("[Unity-AppsPrize]: Initialize");
-            AndroidJavaObject config = AppsPrizeConfigAndroid.CreateConfig("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE5fQ.veS-GapCh2LnUkZWddiPWfb8DLEWvyE2VqA-mMKRESM", "asfsdf", "asdfadsf");
+            AndroidJavaObject androidConfig = AppsPrizeConfigAndroid.Create(config);
 
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
-                appsPrizeClass.CallStatic("initialize", unityActivity, config, null);
+                appsPrizeClass.CallStatic("initialize", unityActivity, androidConfig, new AppsPrizeListener(listener));
             }));
            
         }
@@ -37,9 +37,9 @@ namespace AppsPrizeUnity.Platforms.Android
         // }
 
         // Launch AppsPrize Activity
-        public static void LaunchActivity()
+        public static void Launch()
         {
-            Debug.Log("[Unity-AppsPrize]: LaunchActivity");
+            Debug.Log("[Unity-AppsPrize]: Launch");
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
                 appsPrizeClass.CallStatic<bool>("launchActivity", unityActivity);
             }));
