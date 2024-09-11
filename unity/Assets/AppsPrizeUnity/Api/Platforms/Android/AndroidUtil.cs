@@ -25,9 +25,9 @@ internal static class AndroidUtil
             AndroidJavaObject rewardObj = rewards.Call<AndroidJavaObject>("get", i);
             Reward reward = new Reward
             {
-                Level = rewardObj.Get<int>("level"),
-                Points = rewardObj.Get<int>("points"),
-                Currency = rewardObj.Get<string>("currency")
+                Level = rewardObj.Call<int>("getLevel"),
+                Points = rewardObj.Call<int>("getPoints"),
+                Currency = rewardObj.Call<string>("getCurrency")
             };
             rewardList.Add(reward);
         }

@@ -15,21 +15,19 @@ namespace AppsPrizeUnity.Platforms.Android
             this.listener = listener;
         }
 
-        // Called when AppsPrize initialization is completed
         void onInitialize()
         {
             listener.OnInitialize();
         }
 
-        // Called when AppsPrize initialization fails
         void onInitializeFailed(string errorMessage)
         {
             listener.OnInitializeFailed(errorMessage);
         }
 
-        // Called when rewards are updated
         void onRewardUpdate(AndroidJavaObject rewards)
         {
+            Debug.Log("Internal: onRewardUpdate: " + rewards);
             List<Reward> rewardList = AndroidUtil.ConvertRewards(rewards);
             listener.OnRewardUpdate(rewardList);
         }

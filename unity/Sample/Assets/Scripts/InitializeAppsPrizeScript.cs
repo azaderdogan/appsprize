@@ -15,7 +15,7 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
         AppsPrize.Initialize(
             new AppsPrizeConfig(
                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE5fQ.veS-GapCh2LnUkZWddiPWfb8DLEWvyE2VqA-mMKRESM",
-                advertisingId: GetAndroidAdvertiserId(),
+                advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
                 userId: "1111",
                 country: "US",
                 language: "en",
@@ -32,7 +32,7 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
 
         Debug.Log("[AppsPrize-Unity]: HasPermissions" + AppsPrize.HasPermissions());
         Debug.Log("[AppsPrize-Unity]: " + AppsPrize.RequestPermission());
-        notifyText.Log("[AppsPrize-Unity]: Try initialize: " + GetAndroidAdvertiserId());
+        notifyText.Log("[AppsPrize-Unity]: Try initialize");
     }
 
     public void OnInitialize()
@@ -51,24 +51,6 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
     {
         Debug.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
         notifyText.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
-    }
-
-    private static string GetAndroidAdvertiserId()
-    {
-        string advertisingID = "AA1111AA-A111-11AA-A111-11AAA1A11111";
-        try
-        {
-            AndroidJavaClass up = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject> ("currentActivity");
-            AndroidJavaClass client = new AndroidJavaClass ("com.google.android.gms.ads.identifier.AdvertisingIdClient");
-            AndroidJavaObject adInfo = client.CallStatic<AndroidJavaObject> ("getAdvertisingIdInfo", currentActivity);
-    
-            advertisingID = adInfo.Call<string> ("getId").ToString();  
-        }
-        catch (Exception)
-        {
-        }
-        return advertisingID;
     }
 }
 
