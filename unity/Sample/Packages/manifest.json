@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.appsamurai.appsprize-unity": "file:/Users/hmelihf/Me/appsamurai/projects/me/appsprize/unity/Source/Plugin",
-    "com.google.external-dependency-manager": "file:/Users/hmelihf/Downloads/unity-jar-resolver-1.2.182/upm",
+    "com.appsamurai.appsprize-unity": "file:../../Assets/AppsPrizeUnity",
+    "com.google.external-dependency-manager": "file:../../Assets/Packages/unity-jar-resolver-1.2.182/upm",
     "com.unity.collab-proxy": "2.5.1",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",

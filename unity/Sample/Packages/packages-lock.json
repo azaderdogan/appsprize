@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "com.appsamurai.appsprize-unity": {
-      "version": "file:/Users/hmelihf/Me/appsamurai/projects/me/appsprize/unity/Source/Plugin",
+      "version": "file:../../Assets/AppsPrizeUnity",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.google.external-dependency-manager": {
-      "version": "file:/Users/hmelihf/Downloads/unity-jar-resolver-1.2.182/upm",
+      "version": "file:../../Assets/Packages/unity-jar-resolver-1.2.182/upm",
       "depth": 0,
       "source": "local",
       "dependencies": {}
