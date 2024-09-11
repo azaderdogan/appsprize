@@ -25,15 +25,15 @@ namespace AppsPrizeUnity.Platforms.Android
             AndroidJavaObject androidConfig = AppsPrizeConfigAndroid.Create(config);
 
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
-                appsPrizeClass.CallStatic("initialize", unityActivity, androidConfig, new AppsPrizeListener(listener));
+                appsPrizeClass.CallStatic("initialize", unityActivity, androidConfig, new AppsPrizeAndroidListener(listener));
             }));
            
         }
 
-        public static void DoReward(Action<List<AppRewards>> onSessionRewardCallback)
+        public static void DoReward(AppsPrizeRewardListener onSessionRewardCallback)
         {
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
-                appsPrizeClass.CallStatic("doReward", unityActivity, new AppsPrizeRewardListener(onSessionRewardCallback));
+                appsPrizeClass.CallStatic("doReward", unityActivity, new AppsPrizeRewardAndroidListener(onSessionRewardCallback));
             }));
         }
 

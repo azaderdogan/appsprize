@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace AppsPrizeUnity.Platforms.Android
 {
-    public class AppsPrizeListener : AndroidJavaProxy
+    public class AppsPrizeAndroidListener : AndroidJavaProxy
     {
         private readonly IAppsPrizeListener listener;
 
-        public AppsPrizeListener(IAppsPrizeListener listener)
+        public AppsPrizeAndroidListener(IAppsPrizeListener listener)
             : base("com.appsamurai.appsprize.AppsPrizeListener")
         {
             this.listener = listener;
@@ -33,11 +33,11 @@ namespace AppsPrizeUnity.Platforms.Android
         }
     }
 
-    public class AppsPrizeRewardListener : AndroidJavaProxy
+    public class AppsPrizeRewardAndroidListener : AndroidJavaProxy
     {
-        private readonly Action<List<AppRewards>> onSessionRewardCallback;
+        private readonly AppsPrizeRewardListener onSessionRewardCallback;
 
-        public AppsPrizeRewardListener(Action<List<AppRewards>> callback) : base("com.appsamurai.appsprize.AppsPrizeRewardListener")
+        public AppsPrizeRewardAndroidListener(AppsPrizeRewardListener callback) : base("com.appsamurai.appsprize.AppsPrizeRewardListener")
         {
             onSessionRewardCallback = callback;
         }
