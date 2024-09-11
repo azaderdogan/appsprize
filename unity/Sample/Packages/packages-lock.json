@@ -7,10 +7,11 @@
       "dependencies": {}
     },
     "com.google.external-dependency-manager": {
-      "version": "file:../../Assets/Packages/unity-jar-resolver-1.2.182/upm",
+      "version": "1.2.178",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.unity.collab-proxy": {
       "version": "2.5.1",
