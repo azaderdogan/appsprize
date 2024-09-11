@@ -7,12 +7,11 @@ namespace AppsPrizeUnity.Platforms.Android
 {
     public static class AppsPrizeAndroid
     {
-        private static AndroidJavaClass appsPrizeClass;
-        private static AndroidJavaObject unityActivity;
+        private static readonly AndroidJavaClass appsPrizeClass;
+        private static readonly AndroidJavaObject unityActivity;
 
         static AppsPrizeAndroid()
         {
-            Debug.Log("[Unity-AppsPrize]: static-load");
             using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
             {
                 unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");

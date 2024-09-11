@@ -9,41 +9,41 @@ namespace AppsPrizeUnity
 
         public static void Initialize(AppsPrizeConfig config, IAppsPrizeListener listener)
         {
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
                 AppsPrizeAndroid.Initialize(config, listener);
             #endif
         }
 
         public static void DoReward(Action<List<Reward>> onSessionRewardCallback)
         {
-             #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
                 AppsPrizeAndroid.DoReward(onSessionRewardCallback);
             #endif
         }
 
         public static void Launch()
         {
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
                 AppsPrizeAndroid.Launch();
             #endif
         }
 
         public static bool HasPermissions()
         {
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
                 return AppsPrizeAndroid.HasPermissions();
             #else
-                return false
+                return false;
             #endif
             
         }
 
         public static bool RequestPermission()
         {
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
                 return AppsPrizeAndroid.RequestPermission();
             #else
-                return false
+                return false;
             #endif
         }
     }
