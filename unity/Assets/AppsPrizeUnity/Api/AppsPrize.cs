@@ -14,7 +14,7 @@ namespace AppsPrizeUnity
             #endif
         }
 
-        public static void DoReward(Action<List<Reward>> onSessionRewardCallback)
+        public static void DoReward(Action<List<AppRewards>> onSessionRewardCallback)
         {
             #if UNITY_ANDROID
                 AppsPrizeAndroid.DoReward(onSessionRewardCallback);
@@ -52,7 +52,13 @@ namespace AppsPrizeUnity
     {
         void OnInitialize();
         void OnInitializeFailed(string errorMessage);
-        void OnRewardUpdate(List<Reward> rewards);
+        void OnRewardUpdate(List<AppRewards> rewards);
+    }
+
+
+    public class AppRewards
+    {
+        public List<Reward> Rewards { get; set; }
     }
 
     public class Reward

@@ -15,23 +15,44 @@ internal static class AndroidUtil
         return new AndroidJavaObject("java.lang.Integer", androidColor);
     }
 
+    public static List<AppRewards> ConvertAppRewards(AndroidJavaObject appRewards)
+    {
+        var appRewardsList = new List<AppRewards>();
+        int size = appRewards.Call<int>("size");
+        for (int i = 0; i < size; i++)
+        {
+            AndroidJavaObject appRewardObj = appRewards.Call<AndroidJavaObject>("get", i);
+            
+            var rewardObjList = appRewardObj.Get<AndroidJavaObject>("rewards");
+
+            var rewards = ConvertRewards(rewardObjList);
+            AppRewards appReward = new()
+            {
+                Rewards = rewards,
+            };
+            appRewardsList.Add(appReward);
+        }
+        return appRewardsList;
+    }
+
+
     public static List<Reward> ConvertRewards(AndroidJavaObject rewards)
     {
         var rewardList = new List<Reward>();
-        
+                
         int size = rewards.Call<int>("size");
         for (int i = 0; i < size; i++)
         {
             AndroidJavaObject rewardObj = rewards.Call<AndroidJavaObject>("get", i);
-            Reward reward = new Reward
+            Reward reward = new()
             {
-                Level = rewardObj.Call<int>("getLevel"),
-                Points = rewardObj.Call<int>("getPoints"),
-                Currency = rewardObj.Call<string>("getCurrency")
+                Level = rewardObj.Get<int>("level"),
+                Points = rewardObj.Get<int>("points"),
+                Currency = rewardObj.Get<string>("currency")
             };
             rewardList.Add(reward);
         }
-
         return rewardList;
     }
+
 }

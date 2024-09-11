@@ -28,23 +28,23 @@ namespace AppsPrizeUnity.Platforms.Android
         void onRewardUpdate(AndroidJavaObject rewards)
         {
             Debug.Log("Internal: onRewardUpdate: " + rewards);
-            List<Reward> rewardList = AndroidUtil.ConvertRewards(rewards);
+            List<AppRewards> rewardList = AndroidUtil.ConvertAppRewards(rewards);
             listener.OnRewardUpdate(rewardList);
         }
     }
 
     public class AppsPrizeRewardListener : AndroidJavaProxy
     {
-        private readonly Action<List<Reward>> onSessionRewardCallback;
+        private readonly Action<List<AppRewards>> onSessionRewardCallback;
 
-        public AppsPrizeRewardListener(Action<List<Reward>> callback) : base("com.appsamurai.appsprize.AppsPrizeRewardListener")
+        public AppsPrizeRewardListener(Action<List<AppRewards>> callback) : base("com.appsamurai.appsprize.AppsPrizeRewardListener")
         {
             onSessionRewardCallback = callback;
         }
 
         void onSessionReward(AndroidJavaObject rewards)
         {
-            List<Reward> rewardList = AndroidUtil.ConvertRewards(rewards);
+            List<AppRewards> rewardList = AndroidUtil.ConvertAppRewards(rewards);
             onSessionRewardCallback?.Invoke(rewardList);
         }
     }

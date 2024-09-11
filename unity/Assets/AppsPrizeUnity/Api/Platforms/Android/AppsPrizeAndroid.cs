@@ -30,7 +30,7 @@ namespace AppsPrizeUnity.Platforms.Android
            
         }
 
-        public static void DoReward(Action<List<Reward>> onSessionRewardCallback)
+        public static void DoReward(Action<List<AppRewards>> onSessionRewardCallback)
         {
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
                 appsPrizeClass.CallStatic("doReward", unityActivity, new AppsPrizeRewardListener(onSessionRewardCallback));
