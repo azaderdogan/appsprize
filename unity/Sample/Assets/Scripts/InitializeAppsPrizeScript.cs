@@ -30,10 +30,12 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
             this
         );
 
+        // AppsPrize.DoReward(OnCurrentRewardUpdate);
+
         Debug.Log("[AppsPrize-Unity]: HasPermissions" + AppsPrize.HasPermissions());
         Debug.Log("[AppsPrize-Unity]: " + AppsPrize.RequestPermission());
         notifyText.Log("[AppsPrize-Unity]: Try initialize");
-    }
+	}
 
     public void OnInitialize()
     {
@@ -47,10 +49,17 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
         notifyText.Log("[AppsPrize-Unity]: OnInitializeFailed:" + errorMessage);
     }
 
-    public void OnRewardUpdate(List<Reward> rewards)
+    public void OnRewardUpdate(List<AppRewards> rewards)
     {
         Debug.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
         notifyText.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
     }
+
+
+    // public void OnCurrentRewardUpdate(List<AppRewards> rewards)
+    // {
+    //     notifyText.Log("[AppsPrize-Unity]: Current rewards: " + rewards.ToString());
+    // }
+
 }
 
