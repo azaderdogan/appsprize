@@ -21,7 +21,6 @@ namespace AppsPrizeUnity.Platforms.Android
 
         public static void Initialize(AppsPrizeConfig config, IAppsPrizeListener listener)
         {
-            Debug.Log("[Unity-AppsPrize]: Initialize");
             AndroidJavaObject androidConfig = AppsPrizeConfigAndroid.Create(config);
 
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {

@@ -27,7 +27,6 @@ namespace AppsPrizeUnity.Platforms.Android
 
         void onRewardUpdate(AndroidJavaObject rewards)
         {
-            Debug.Log("Internal: onRewardUpdate: " + rewards);
             List<AppRewards> rewardList = AndroidUtil.ConvertAppRewards(rewards);
             listener.OnRewardUpdate(rewardList);
         }
