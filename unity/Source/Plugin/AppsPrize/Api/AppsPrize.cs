@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AppsPrizeUnity.Platforms.Android;
 
@@ -13,11 +14,12 @@ namespace AppsPrizeUnity
             #endif
         }
 
-        // // Reward session with listener
-        // public static void DoReward(AppsPrizeRewardListener rewardListener)
-        // {
-        //     appsPrizeClass.CallStatic("doReward", unityActivity, rewardListener);
-        // }
+        public static void DoReward(Action<List<Reward>> onSessionRewardCallback)
+        {
+             #if UNITY_ANDROID
+                AppsPrizeAndroid.DoReward(onSessionRewardCallback);
+            #endif
+        }
 
         public static void Launch()
         {
@@ -26,17 +28,24 @@ namespace AppsPrizeUnity
             #endif
         }
 
-        // // Check if has permissions
-        // public static bool HasPermissions()
-        // {
-        //     return appsPrizeClass.CallStatic<bool>("hasPermissions", unityActivity);
-        // }
+        public static bool HasPermissions()
+        {
+            #if UNITY_ANDROID
+                return AppsPrizeAndroid.HasPermissions();
+            #else
+                return false
+            #endif
+            
+        }
 
-        // // Request permissions
-        // public static bool RequestPermission()
-        // {
-        //     return appsPrizeClass.CallStatic<bool>("requestPermission", unityActivity);
-        // }
+        public static bool RequestPermission()
+        {
+            #if UNITY_ANDROID
+                return AppsPrizeAndroid.RequestPermission();
+            #else
+                return false
+            #endif
+        }
     }
 
     public interface IAppsPrizeListener

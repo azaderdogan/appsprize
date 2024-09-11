@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -18,7 +20,6 @@ namespace AppsPrizeUnity.Platforms.Android
             appsPrizeClass = new AndroidJavaClass("com.appsamurai.appsprize.AppsPrize");
         }
 
-        // Initialize AppsPrize with AppsPrizeConfig and listener
         public static void Initialize(AppsPrizeConfig config, IAppsPrizeListener listener)
         {
             Debug.Log("[Unity-AppsPrize]: Initialize");
@@ -30,38 +31,29 @@ namespace AppsPrizeUnity.Platforms.Android
            
         }
 
-        // // Reward session with listener
-        // public static void DoReward(AppsPrizeRewardListener rewardListener)
-        // {
-        //     appsPrizeClass.CallStatic("doReward", unityActivity, rewardListener);
-        // }
+        public static void DoReward(Action<List<Reward>> onSessionRewardCallback)
+        {
+            unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
+                appsPrizeClass.CallStatic("doReward", unityActivity, new AppsPrizeRewardListener(onSessionRewardCallback));
+            }));
+        }
 
-        // Launch AppsPrize Activity
         public static void Launch()
         {
-            Debug.Log("[Unity-AppsPrize]: Launch");
             unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
                 appsPrizeClass.CallStatic<bool>("launchActivity", unityActivity);
             }));
         }
 
-        // // Get Activity Intent
-        // public static AndroidJavaObject GetActivityIntent()
-        // {
-        //     return appsPrizeClass.CallStatic<AndroidJavaObject>("getActivityIntent", unityActivity);
-        // }
+        public static bool HasPermissions()
+        {
+            return appsPrizeClass.CallStatic<bool>("hasPermissions", unityActivity);
+        }
 
-        // // Check if has permissions
-        // public static bool HasPermissions()
-        // {
-        //     return appsPrizeClass.CallStatic<bool>("hasPermissions", unityActivity);
-        // }
-
-        // // Request permissions
-        // public static bool RequestPermission()
-        // {
-        //     return appsPrizeClass.CallStatic<bool>("requestPermission", unityActivity);
-        // }
+        public static bool RequestPermission()
+        {
+            return appsPrizeClass.CallStatic<bool>("requestPermission", unityActivity);
+        }
     }
 }
 
