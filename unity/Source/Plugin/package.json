@@ -1,19 +1,19 @@
 {
   "name": "com.appsamurai.appsprize-unity",
   "version": "1.1.3",
-  "displayName": "AppsPrize",
-  "description": "This is an example package",
+  "displayName": "AppsPrize SDK",
+  "description": "Appsprize Playtime SDK",
   "unity": "2019.1",
   "unityRelease": "0b5",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
+  "documentationUrl": "https://docs.appsprize.com/",
+  "changelogUrl": "https://github.com/Netvent/appsprize/tree/master/unity/Source/Plugin/RELEASENOTES.md",
+  "licensesUrl": "https://github.com/Netvent/appsprize/tree/master/unity/Source/Plugin/LICENSE",
   "keywords": [
     "android"
   ],
   "author": {
     "name": "Appsamurai",
     "email": "mobile@appsamurai.com",
-    "url": "https://appsamurai.com"
+    "url": "https://offer.appsamurai.com/appsprize-offerwall"
   }
 }
