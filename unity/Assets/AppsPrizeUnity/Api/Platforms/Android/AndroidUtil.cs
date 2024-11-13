@@ -22,7 +22,7 @@ internal static class AndroidUtil
 
     public static long? FromAndroidLong(AndroidJavaObject obj)
     {
-        long? timestamp = obj == null ? (long?) null : (long) obj.Call<long>("longValue");
+        long? timestamp = obj == null ? null : obj.Call<long>("longValue");
         return timestamp;
     }
 
