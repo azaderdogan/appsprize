@@ -1,4 +1,4 @@
-import { AppsPrizeEventType, type AppsPrizeListener, type OnInitializeEvent, type OnInitializeFailedEvent, type OnRewardUpdateEvent } from "./Events"
+import { AppsPrizeEventType, type AppsPrizeListener, type OnInitializeEvent, type OnInitializeFailedEvent, type OnNotificationEvent, type OnRewardUpdateEvent } from "./Events"
 import AppsPrizeNative, { addEventListener, decodeData, encodeData, removeAllListeners } from "./AppsPrizeNative"
 import type { AppRewards, AppsPrizeConfig } from "./Data";
 
@@ -20,11 +20,19 @@ function init(config: AppsPrizeConfig, listener: AppsPrizeListener) {
         let event = decodeData(nativeEvent.raw) as OnRewardUpdateEvent
         if (listener.onRewardUpdate) listener.onRewardUpdate(event) 
     })
+    addEventListener(AppsPrizeEventType.onNotification, (nativeEvent) => {
+        let event = decodeData(nativeEvent.raw) as OnNotificationEvent
+        if (listener.onNotification) listener.onNotification(event)
+    })
     AppsPrizeNative?.init(rawConfig)
 }
 
 function launch(): Promise<boolean> {
     return AppsPrizeNative?.launch() ?? Promise.reject("AppsPrizeNative not available")
+}
+
+function open(campaignId: number): Promise<boolean> {
+    return AppsPrizeNative?.open(campaignId) ?? Promise.reject("AppsPrizeNative not available")
 }
 
 function doReward(callback: (rewards: AppRewards[])=>void) {
@@ -46,6 +54,7 @@ function requestPermission(): Promise<boolean> {
 export default {
     init,
     launch,
+    open,
     doReward,
     hasPermissions,
     requestPermission,
