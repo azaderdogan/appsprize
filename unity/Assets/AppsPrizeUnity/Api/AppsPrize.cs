@@ -28,6 +28,13 @@ namespace AppsPrizeUnity
             #endif
         }
 
+        public static void Open(int campaignId)
+        {
+            #if UNITY_ANDROID
+                AppsPrizeAndroid.Open(campaignId);
+            #endif
+        }
+
         public static bool HasPermissions()
         {
             #if UNITY_ANDROID
@@ -53,6 +60,7 @@ namespace AppsPrizeUnity
         void OnInitialize();
         void OnInitializeFailed(string errorMessage);
         void OnRewardUpdate(List<AppRewards> rewards);
+        void OnNotification(List<AppsPrizeNotification> notifications);
     }
 
     public delegate void AppsPrizeRewardListener(List<AppRewards> rewards);
@@ -68,6 +76,17 @@ namespace AppsPrizeUnity
         public int Level { get; set; }
         public int Points { get; set; }
         public string Currency { get; set; }
+    }
+
+    public class AppsPrizeNotification
+    {
+        public int Id { get; set; }
+        public int CampaignId { get; set; }
+        public string AppName { get; set; }
+        public string Description { get; set; }
+        public bool HasRead { get; set; }
+        public string IconUrl { get; set; }
+        public long? Timestamp { get; set; }
     }
 }
 

@@ -43,6 +43,13 @@ namespace AppsPrizeUnity.Platforms.Android
             }));
         }
 
+        public static void Open(int campaignId)
+        {
+            unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
+                appsPrizeClass.CallStatic<bool>("open", unityActivity, campaignId);
+            }));
+        }
+
         public static bool HasPermissions()
         {
             return appsPrizeClass.CallStatic<bool>("hasPermissions", unityActivity);
