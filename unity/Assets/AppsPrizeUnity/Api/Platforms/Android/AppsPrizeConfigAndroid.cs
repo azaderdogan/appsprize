@@ -18,6 +18,31 @@ namespace AppsPrizeUnity.Platforms.Android
             {
                 configBuilder.Call<AndroidJavaObject>("setLanguage", config.language);
             }
+            
+            if (!string.IsNullOrEmpty(config.gender))
+            {
+                configBuilder.Call<AndroidJavaObject>("setGender", config.gender);
+            }
+
+            if (config.age.HasValue)
+            {
+                configBuilder.Call<AndroidJavaObject>("setAge", AndroidUtil.ToAndroidInt(config.age.Value));
+            }
+
+            if (!string.IsNullOrEmpty(config.uaChannel))
+            {
+                configBuilder.Call<AndroidJavaObject>("setUaChannel", config.uaChannel);
+            }
+
+            if (!string.IsNullOrEmpty(config.uaNetwork))
+            {
+                configBuilder.Call<AndroidJavaObject>("setUaNetwork", config.uaNetwork);
+            }
+
+            if (!string.IsNullOrEmpty(config.adPlacement))
+            {
+                configBuilder.Call<AndroidJavaObject>("setAdPlacement", config.adPlacement);
+            }
 
             if (config.styleConfig != null)
             {
@@ -32,16 +57,42 @@ namespace AppsPrizeUnity.Platforms.Android
         {
             AndroidJavaObject styleConfigBuilder = new("com.appsamurai.appsprize.config.style.AppsPrizeStyleConfig$Builder");
 
-            if (styleConfig.primaryColor.HasValue) {
+            if (styleConfig.primaryColor.HasValue)
+            {
                 styleConfigBuilder.Call<AndroidJavaObject>("setPrimaryColor", AndroidUtil.ToAndroidColor(styleConfig.primaryColor.Value));
             }
-
-            if (styleConfig.secondaryColor.HasValue) {
+            if (styleConfig.secondaryColor.HasValue)
+            {
                 styleConfigBuilder.Call<AndroidJavaObject>("setSecondaryColor", AndroidUtil.ToAndroidColor(styleConfig.secondaryColor.Value));
             }
-
-            if (styleConfig.highlightColor.HasValue) {
+            if (styleConfig.highlightColor.HasValue)
+            {
                 styleConfigBuilder.Call<AndroidJavaObject>("setHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.highlightColor.Value));
+            }
+
+            if (styleConfig.promotionHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setPromotionHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.promotionHighlightColor.Value));
+            }
+            if (styleConfig.cashbackHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setCashbackHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.cashbackHighlightColor.Value));
+            }
+            if (styleConfig.secondChanceHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setSecondChanceHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.secondChanceHighlightColor.Value));
+            }
+            if (styleConfig.commonTaskHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setCommonTaskHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.commonTaskHighlightColor.Value));
+            }
+            if (styleConfig.epicTaskHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setEpicTaskHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.epicTaskHighlightColor.Value));
+            }
+            if (styleConfig.legendaryTaskHighlightColor.HasValue)
+            {
+                styleConfigBuilder.Call<AndroidJavaObject>("setLegendaryTaskHighlightColor", AndroidUtil.ToAndroidColor(styleConfig.legendaryTaskHighlightColor.Value));
             }
 
             if (!string.IsNullOrEmpty(styleConfig.offersTitleText))

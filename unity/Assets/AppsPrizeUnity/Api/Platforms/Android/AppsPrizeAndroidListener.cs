@@ -30,6 +30,12 @@ namespace AppsPrizeUnity.Platforms.Android
             List<AppRewards> rewardList = AndroidUtil.ConvertAppRewards(rewards);
             listener.OnRewardUpdate(rewardList);
         }
+
+        void onNotification(AndroidJavaObject notifications)
+        {
+            List<AppsPrizeNotification> notificationList = AndroidUtil.ConvertNotifications(notifications);
+            listener.OnNotification(notificationList);
+        }
     }
 
     public class AppsPrizeRewardAndroidListener : AndroidJavaProxy

@@ -14,18 +14,16 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
     {
         AppsPrize.Initialize(
             new AppsPrizeConfig(
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE5fQ.veS-GapCh2LnUkZWddiPWfb8DLEWvyE2VqA-mMKRESM",
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.6YZeCXIC7StDO4wf1m0wQusrVR8ZwxzXIKFVUDYLKP4",
                 advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
-                userId: "1111",
+                userId: "1111-5",
                 country: "US",
                 language: "en",
-                new AppsPrizeStyleConfig(
-                    primaryColor: Color.blue,
-                    secondaryColor: Color.black,
-                    highlightColor: Color.green,
-                    offersTitleText: "Deneme Offer",
-                    appsTitleText: "Deneme Apps"
-                )
+                gender: "MALE",
+                age: 30,
+                uaChannel: "test uaChannel",
+                uaNetwork: "test uaNetwork",
+                adPlacement: "test adPlacement"
             ),
             this
         );
@@ -53,6 +51,12 @@ public class InitializeAppsPrizeScript : MonoBehaviour, IAppsPrizeListener
     {
         Debug.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
         notifyText.Log("[AppsPrize-Unity]: OnRewardUpdate: " + rewards.ToString());
+    }
+
+    public void OnNotification(List<AppsPrizeNotification> notifications)
+    {
+         Debug.Log("[AppsPrize-Unity]: OnNotification: " + notifications.ToString());
+         notifyText.Log("[AppsPrize-Unity]: OnNotification: " + notifications.ToString());
     }
 
 
