@@ -6,11 +6,16 @@ import AppsPrize, { type AppsPrizeConfig, type AppsPrizeStyleConfig } from 'apps
 
 const buildConfig = (customization: Boolean): AppsPrizeConfig => {
   return {
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTV9.XmX_0neDCxs7FKSSOnTk1KRSN8FSm9lBhJhlOAX0HHs",
-    userId: "melih",
-    advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.6YZeCXIC7StDO4wf1m0wQusrVR8ZwxzXIKFVUDYLKP4",
+    userId: "1111-5",
+    advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11333",
     country: "US",
     language: "en",
+    gender: "test-gender",
+    age: 30,
+    uaChannel: "test-uaChannel",
+    uaNetwork: "test-uaNetwork",
+    adPlacement: "test-adPlacement",
     style: customization ? styleConfig : undefined
   };
 }
@@ -18,6 +23,13 @@ const buildConfig = (customization: Boolean): AppsPrizeConfig => {
 let styleConfig: AppsPrizeStyleConfig =  {
   primaryColor: "#265073",
   secondaryColor: "#F1FADA",
+  highlightColor: "#FF11FF",
+  promotionHighlightColor: "#00FFFF",
+  cashbackHighlightColor: "#00FFFF",
+  secondChanceHighlightColor: "#00FFFF",
+  commonTaskHighlightColor: "#00FFFF",
+  epicTaskHighlightColor: "#00FFFF",
+  legendaryTaskHighlightColor: "#00FFFF",
   bannerDrawable: "custom_banner",
   offersTitleText: "Offer Apps",
   appsTitleText: "Active Apps",
@@ -37,7 +49,10 @@ export default function App() {
       },
       onRewardUpdate: (event) => {
         console.log(`AppsPrize:TS:onRewardUpdate:${JSON.stringify(event)}`)
-      }
+      },
+      onNotification: (event) => {
+        console.log(`AppsPrize:TS:onNotification:${JSON.stringify(event)}`)
+      },
     })
   }, [])
 
@@ -47,7 +62,7 @@ export default function App() {
         title='AppsPrize init'
         onPress={() => {
           AppsPrize.init(buildConfig(true), {
-            onInitialize: (event) => {
+            onInitialize: (_) => {
               console.log("AppsPrize:TS:onInitialize")
             },
             onInitializeFailed: (event) => {
@@ -55,7 +70,10 @@ export default function App() {
             },
             onRewardUpdate: (event) => {
               console.log(`AppsPrize:TS:onRewardUpdate:${JSON.stringify(event)}`)
-            }
+            },
+            onNotification: (event) => {
+              console.log(`AppsPrize:TS: onNotification:${JSON.stringify(event)}`)
+            },
           })
         }}
       />

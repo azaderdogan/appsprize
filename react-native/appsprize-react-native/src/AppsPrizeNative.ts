@@ -9,6 +9,7 @@ const LINKING_ERROR =
 
 interface AppsprizeReactNativeInterface {
     init(raw: string): void;
+    open(campaignId: number): Promise<boolean>;
     launch(): Promise<boolean>;
     doReward(callback: (raw: string)=>void): void;
     hasPermissions(): Promise<boolean>;
