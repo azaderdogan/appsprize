@@ -1,11 +1,11 @@
 <dependencies>
   <packages>
-    <package>com.appsamurai.appsprize:appsprize:2.0.0</package>
+    <package>com.appsamurai.appsprize:appsprize:2.1.0</package>
   </packages>
   <files />
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.appsamurai.appsprize_unity_demo" />
+    <setting name="bundleId" value="com.com.appsamurai.appsprize_unity_demo.AppsPrizeUnityDemo" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="True" />

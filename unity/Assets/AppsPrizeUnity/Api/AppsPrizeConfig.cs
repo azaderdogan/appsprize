@@ -57,8 +57,7 @@ namespace AppsPrizeUnity
        public readonly Color? legendaryTaskHighlightColor = null;
        public readonly string offersTitleText = null;
        public readonly string appsTitleText = null;
-       
-
+        
        public AppsPrizeStyleConfig(
             Color? primaryColor = null,
             Color? secondaryColor = null,

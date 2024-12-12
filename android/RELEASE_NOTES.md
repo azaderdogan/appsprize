@@ -1,5 +1,9 @@
 # Release Notes
 
+### 2.1.0 (12.12.2024)
+* fixed proguard default listener
+* improved security
+
 ### 2.0.0 (12.11.2024)
 * added in-app notifications
 * added promotion days
