@@ -4,7 +4,7 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
-    implementation 'com.appsamurai.appsprize:appsprize:2.0.0' // Packages/com.appsamurai.appsprize-unity/Editor/AppsPrizeUnityDependencies.xml:3
+    implementation 'com.appsamurai.appsprize:appsprize:2.1.0' // Packages/com.appsamurai.appsprize-unity/Editor/AppsPrizeUnityDependencies.xml:3
 // Android Resolver Dependencies End
 **DEPS**}
 
