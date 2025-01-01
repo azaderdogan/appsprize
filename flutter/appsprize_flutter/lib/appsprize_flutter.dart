@@ -19,7 +19,7 @@ class AppsprizeFlutter {
     return AppsprizeFlutterPlatform.instance.open(campaignId);
   }
 
-  Future<List<Map<String, dynamic>>> doReward() {
+  Future<List<Rewards>> doReward() {
     return AppsprizeFlutterPlatform.instance.doReward();
   }
 

@@ -39,7 +39,7 @@ abstract class AppsprizeFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('open() has not been implemented.');
   }
 
-  Future<List<Map<String, dynamic>>> doReward() {
+  Future<List<Rewards>> doReward() {
     throw UnimplementedError('doReward() has not been implemented.');
   }
 

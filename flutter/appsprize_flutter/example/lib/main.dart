@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _appsprizeFlutterPlugin = AppsprizeFlutter();
-  List<Map<String, dynamic>> _rewards = [];
+  List<Rewards> _rewards = [];
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     await _appsprizeFlutterPlugin.init(AppsPrizeConfig(
         token:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.6YZeCXIC7StDO4wf1m0wQusrVR8ZwxzXIKFVUDYLKP4",
-        userId: "1111-5",
+        userId: "1111-6",
         advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
         country: "TR",
         language: "tr",

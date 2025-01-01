@@ -66,7 +66,9 @@ class AppsprizeFlutterModule(private val context: Activity) : MethodChannel.Meth
                 }
             }
             "doReward" -> {
+               
                 val activity = context as? Activity
+
                 if (activity == null) {
                     result.error("NO_ACTIVITY", "Activity not found", null)
                     return
@@ -186,10 +188,13 @@ fun init(raw: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
     }
 
     fun doReward(activity: Activity, onReward: (List<Map<String, Any?>>) -> Unit) {
+        Log.d("[AppsPrizeAndroid]", "doReward")
         // Run the doReward on the main thread
         Handler(activity.mainLooper).post {
+            Log.d("[AppsPrizeAndroid]", "doReward post")
             AppsPrize.doReward(activity) { rewards ->
                 val appRewardsMap = rewards.map { createAppReward(it) }
+                Log.d("[AppsPrizeAndroid]", "doReward rewards $appRewardsMap")
                 onReward(appRewardsMap)
             }
         }
@@ -206,6 +211,7 @@ fun init(raw: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
     }
 
     private fun createAppReward(reward: AppReward): Map<String, Any?> {
+        Log.d("[AppsPrizeAndroid]", "createAppReward with reward $reward")
         return mapOf(
             "rewards" to reward.rewards.map {
                 mapOf(

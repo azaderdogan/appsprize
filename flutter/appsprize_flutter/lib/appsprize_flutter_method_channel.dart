@@ -24,13 +24,12 @@ class MethodChannelAppsprizeFlutter extends AppsprizeFlutterPlatform {
   Map<String, StreamSubscription> _eventSubscriptions = {};
 
   @override
-  @override
   Future<void> init(AppsPrizeConfig config) async {
     try {
-      _eventSubscriptions.values
-          .forEach((subscription) => subscription.cancel());
+      for (var subscription in _eventSubscriptions.values) {
+        subscription.cancel();
+      }
       _eventSubscriptions.clear();
-
       final String rawConfig = jsonEncode(config.toJson());
 
       _setupEventListener('onInitialize');
@@ -83,12 +82,12 @@ class MethodChannelAppsprizeFlutter extends AppsprizeFlutterPlatform {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> doReward() async {
+  Future<List<Rewards>> doReward() async {
     try {
-      final String? rawRewards = await methodChannel.invokeMethod('doReward');
+      var rawRewards = await methodChannel.invokeMethod('doReward');
       if (rawRewards != null) {
-        final decoded = jsonDecode(rawRewards);
-        final rewards = List<Map<String, dynamic>>.from(decoded['rewards']);
+        final rewards =
+            rawRewards['rewards'].map((e) => Rewards.fromJson(e)).toList();
         return rewards;
       }
     } catch (e) {
@@ -151,5 +150,50 @@ class AppsPrizeConfig {
       'adPlacement': adPlacement,
       if (style != null) 'style': style,
     };
+  }
+}
+
+class Reward {
+  List<Rewards>? rewards;
+
+  Reward({this.rewards});
+
+  Reward.fromJson(Map<String, dynamic> json) {
+    if (json['rewards'] != null) {
+      rewards = <Rewards>[];
+      json['rewards'].forEach((v) {
+        rewards!.add(new Rewards.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.rewards != null) {
+      data['rewards'] = this.rewards!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Rewards {
+  String? currency;
+  int? levels;
+  int? points;
+
+  Rewards({this.currency, this.levels, this.points});
+
+  Rewards.fromJson(Map<String, dynamic> json) {
+    currency = json['currency'];
+    levels = json['levels'];
+    points = json['points'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['currency'] = this.currency;
+    data['levels'] = this.levels;
+    data['points'] = this.points;
+    return data;
   }
 }
