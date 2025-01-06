@@ -256,6 +256,7 @@ Log.d("[AppsPrizeAndroid]", "buildConfig with token $token")
     // Build the style configuration
     private fun buildStyleConfig(map: Map<String, Any?>?): AppsPrizeStyleConfig? {
         map ?: return null
+        Log.d("[AppsPrizeAndroid]", "buildStyleConfig with map $map")
         val primaryColor = (map["primaryColor"] as? String)?.let { Color.parseColor(it) }
         val secondaryColor = (map["secondaryColor"] as? String)?.let { Color.parseColor(it) }
         val highlightColor = (map["highlightColor"] as? String)?.let { Color.parseColor(it) }

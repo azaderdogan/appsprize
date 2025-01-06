@@ -1,3 +1,6 @@
+import 'models/models.dart';
+import 'package:appsprize_flutter/models/apps_prize_config.dart';
+import 'package:appsprize_flutter/models/rewards.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'appsprize_flutter_method_channel.dart';

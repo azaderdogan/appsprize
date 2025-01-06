@@ -1,4 +1,5 @@
 import 'package:appsprize_flutter/appsprize_flutter_method_channel.dart';
+import 'package:appsprize_flutter/models/models.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -21,7 +22,22 @@ class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _appsprizeFlutterPlugin = AppsprizeFlutter();
   List<Rewards> _rewards = [];
-
+  final styleConfig = AppsPrizeStyleConfig(
+    primaryColor: "#465073",
+    secondaryColor: "#F2FADA",
+    highlightColor: "#FF11FF",
+    promotionHighlightColor: "#00FFFF",
+    cashbackHighlightColor: "#00FFFF",
+    secondChanceHighlightColor: "#00FFFF",
+    commonTaskHighlightColor: "#00FFFF",
+    epicTaskHighlightColor: "#00FFFF",
+    legendaryTaskHighlightColor: "#00FFFF",
+    bannerDrawable: "custom_banner",
+    offersTitleText: "Offer Apps",
+    appsTitleText: "Aktif Uygulamalars",
+    typeface: "kodemono.ttf",
+    // currencyIcon is optional
+  );
   @override
   void initState() {
     super.initState();
@@ -34,14 +50,14 @@ class _MyAppState extends State<MyApp> {
         token:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.6YZeCXIC7StDO4wf1m0wQusrVR8ZwxzXIKFVUDYLKP4",
         userId: "1111-6",
-        advertisingId: "AA1111AA-A111-11AA-A111-11AAA1A11111",
         country: "TR",
         language: "tr",
         gender: "test-gender",
         age: 30,
         uaChannel: "test-uaChannel",
         uaNetwork: "test-uaNetwork",
-        adPlacement: "test-adPlacement"));
+        adPlacement: "test-adPlacement",
+        style: styleConfig));
   }
 
   Future<void> _launchAppsprize() async {
