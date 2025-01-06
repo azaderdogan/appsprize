@@ -23,8 +23,8 @@ class _MyAppState extends State<MyApp> {
   final _appsprizeFlutterPlugin = AppsprizeFlutter();
   List<Rewards> _rewards = [];
   final styleConfig = AppsPrizeStyleConfig(
-    primaryColor: "#465073",
-    secondaryColor: "#F2FADA",
+    primaryColor: "#365073",
+    secondaryColor: "#F4FADA",
     highlightColor: "#FF11FF",
     promotionHighlightColor: "#00FFFF",
     cashbackHighlightColor: "#00FFFF",
@@ -33,8 +33,8 @@ class _MyAppState extends State<MyApp> {
     epicTaskHighlightColor: "#00FFFF",
     legendaryTaskHighlightColor: "#00FFFF",
     bannerDrawable: "custom_banner",
-    offersTitleText: "Offer Apps",
-    appsTitleText: "Aktif Uygulamalars",
+    offersTitleText: "Ödüller",
+    appsTitleText: "Aktif Uygulamalar",
     typeface: "kodemono.ttf",
     // currencyIcon is optional
   );

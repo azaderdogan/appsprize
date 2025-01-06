@@ -236,7 +236,7 @@ fun init(raw: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val uaChannel = map["uaChannel"] as? String?
         val uaNetwork = map["uaNetwork"] as? String?
         val adPlacement = map["adPlacement"] as? String?
-Log.d("[AppsPrizeAndroid]", "buildConfig with token $token")
+
         return AppsPrizeConfig.Builder()
             .setCountry(country)
             .setLanguage(language)
@@ -252,19 +252,40 @@ Log.d("[AppsPrizeAndroid]", "buildConfig with token $token")
                 userId
             )
     }
-
     // Build the style configuration
     private fun buildStyleConfig(map: Map<String, Any?>?): AppsPrizeStyleConfig? {
         map ?: return null
-        Log.d("[AppsPrizeAndroid]", "buildStyleConfig with map $map")
         val primaryColor = (map["primaryColor"] as? String)?.let { Color.parseColor(it) }
         val secondaryColor = (map["secondaryColor"] as? String)?.let { Color.parseColor(it) }
         val highlightColor = (map["highlightColor"] as? String)?.let { Color.parseColor(it) }
+        val promotionHighlightColor = (map["promotionHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+        val cashbackHighlightColor = (map["cashbackHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+        val secondChanceHighlightColor = (map["secondChanceHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+        val commonTaskHighlightColor = (map["commonTaskHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+        val epicTaskHighlightColor = (map["epicTaskHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+        val legendaryTaskHighlightColor = (map["legendaryTaskHighlightColor"] as? String?)?.let { Color.parseColor(it) }
+
+        val typeface = getTypeface(context, map["typeface"] as? String)
+        val bannerDrawable = getDrawable(context, map["bannerDrawable"] as? String)
+        val offersTitleText = map["offersTitleText"] as? String
+        val appsTitleText = map["appsTitleText"] as? String
+        val currencyIcon = getDrawable(context, map["currencyIcon"] as? String)
 
         return AppsPrizeStyleConfig.Builder()
             .setPrimaryColor(primaryColor)
             .setSecondaryColor(secondaryColor)
             .setHighlightColor(highlightColor)
+            .setPromotionHighlightColor(promotionHighlightColor)
+            .setCashbackHighlightColor(cashbackHighlightColor)
+            .setSecondChanceHighlightColor(secondChanceHighlightColor)
+            .setCommonTaskHighlightColor(commonTaskHighlightColor)
+            .setEpicTaskHighlightColor(epicTaskHighlightColor)
+            .setLegendaryTaskHighlight(legendaryTaskHighlightColor)
+            .setTypeface(typeface)
+            .setBannerDrawable(bannerDrawable)
+            .setOffersTitleText(offersTitleText)
+            .setAppsTitleText(appsTitleText)
+            .setCurrencyIcon(currencyIcon)
             .build()
     }
 }
