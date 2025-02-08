@@ -37,8 +37,6 @@ flutter:
       android:
         package: com.example.appsprize_flutter
         pluginClass: AppsprizeFlutterPlugin
-      ios:
-        pluginClass: AppsprizeFlutterPlugin
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
